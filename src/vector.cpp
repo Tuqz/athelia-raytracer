@@ -2,6 +2,10 @@
 #include "vector.h"
 using namespace athl;
 
+Vector::Vector(double x, double y, double z)
+	: x(x), y(y), z(z)
+{}
+
 Vector Vector::operator +(const Vector &vector) const
 {
 	return
@@ -16,9 +20,9 @@ Vector Vector::operator -(const Vector &vector) const
 {
 	return
 	{
-		.x = x + vector.x,
-		.y = y + vector.y,
-		.z = z + vector.z
+		.x = x - vector.x,
+		.y = y - vector.y,
+		.z = z - vector.z
 	};
 }
 
