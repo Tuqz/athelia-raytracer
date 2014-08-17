@@ -1,40 +1,19 @@
 #pragma once
 
-struct AthlVector
+namespace athl
 {
-	double x, y, z;
-};
+	class Vector
+	{
+	public:
+		double x, y, z;
+		Vector operator +(const Vector &vector) const;
+		Vector operator -(const Vector &vector) const;
+		Vector operator *(double scalar) const;
 
-struct AthlVector athl_vector_add
-(
-	struct AthlVector one,
-	struct AthlVector two
-);
-struct AthlVector athl_vector_subtract
-(
-	struct AthlVector one,
-	struct AthlVector two
-);
-struct AthlVector athl_vector_multiply
-(
-	double scalar,
-	struct AthlVector vector
-);
-double athl_vector_dot
-(
-	struct AthlVector one,
-	struct AthlVector two
-);
-struct AthlVector athl_vector_cross
-(
-	struct AthlVector one,
-	struct AthlVector two
-);
-double athl_vector_size
-(
-	struct AthlVector vector
-);
-double athl_vector_magnitude
-(
-	struct AthlVector vector
-);
+		double dot(const Vector &vector) const;
+		Vector cross(const Vector &vector) const;
+
+		double size() const;
+		double magnitude() const;
+	};
+}

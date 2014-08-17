@@ -1,9 +1,9 @@
 e = Environment()
-e.Append(CCFLAGS = ['-std=c99', '-Wall'])
+e.Append(CXXFLAGS = ['-std=c++11', '-Wall'])
 e.Replace(LIBPREFIX = '')
 
 e.SharedLibrary(target = 'athelia', source =
 	[
-		'src/vector.c',
+		'src/vector.cpp',
 	]
 )
