@@ -13,6 +13,6 @@ namespace athl
 		~Callback();
 	private:
 		const Runner runner;
-		const void *data;
-	}
+		void *data;
+	};
 }

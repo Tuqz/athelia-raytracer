@@ -7,6 +7,7 @@ e.SharedLibrary(target = 'athelia', source =
 	[
 		'src/vector.cpp',
 		'src/athelia.i',
-		'src/ray.cpp'
+		'src/ray.cpp',
+		'src/callback.cpp'
 	]
 )
