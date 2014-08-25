@@ -1,18 +1,24 @@
 #pragma once
+#include <memory>
+#include <iostream>
 #include "ray.h"
 #include "vector.h"
 
 namespace athl 
 {
-	typedef Ray (*Runner)(void *, Ray, Vector);
+	typedef Ray (*CallbackExecFn)
+	(
+		const std::shared_ptr<void> &,
+		const Ray &,
+		const Vector &
+	);
 	class Callback 
 	{
 	public:
-		Callback(Runner runner, void *data);
-		Ray run(Ray ray, Vector pos) const;
-		~Callback();
+		Callback(CallbackExecFn runner, const std::shared_ptr<void> &data);
+		Ray invoke(const Ray &ray, const Vector &pos) const;
 	private:
-		const Runner runner;
-		void *data;
+		const CallbackExecFn runner;
+		const std::shared_ptr<void> data;
 	};
 }

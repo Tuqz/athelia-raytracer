@@ -2,6 +2,10 @@
 #include "vector.h"
 using namespace athl;
 
+Vector::Vector(double value)
+	: x(value), y(value), z(value)
+{}
+
 Vector::Vector(double x, double y, double z)
 	: x(x), y(y), z(z)
 {}

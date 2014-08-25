@@ -5,6 +5,7 @@ namespace athl
 	class Vector
 	{
 	public:
+		Vector(double value);
 		Vector(double x, double y, double z);
 		double x, y, z;
 		Vector operator +(const Vector &vector) const;

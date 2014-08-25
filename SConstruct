@@ -6,8 +6,11 @@ e.Replace(LIBPREFIX = '')
 e.SharedLibrary(target = 'athelia', source =
 	[
 		'src/vector.cpp',
-		'src/athelia.i',
+		'src/colour.cpp',
 		'src/ray.cpp',
-		'src/callback.cpp'
+		'src/callback.cpp',
+		'src/voxel.cpp',
+		'src/octree.cpp',
+		'src/athelia.i'
 	]
 )

@@ -1,30 +1,37 @@
 #include <algorithm>
+#include <limits>
 #include "ray.h"
 using namespace athl;
 
-Ray::Ray(const Vector &position, const Vector &direction)
+Ray::Ray(const Vector &position, const Vector &direction, const Colour &colour)
 :
 	position(position),
 	direction(direction),
-	inverse_direction(1 / direction.x, 1 / direction.y, 1 / direction.z)
+	inverse_direction(1 / direction.x, 1 / direction.y, 1 / direction.z),
+	colour(colour)
 {}
 
-double Ray::intersects_box(const Vector &min, double box_size)
+double Ray::intersects_AABB(const Vector &origin, double size) const
 {
-	Vector max = min + Vector({box_size, box_size, box_size});
+	Vector max = origin + Vector(size);
 
-	double x_1 = (min.x - position.x) * inverse_direction.x;
-	double x_2 = (max.x - position.x) * inverse_direction.x;
+	double x1 = (origin.x - position.x) * inverse_direction.x;
+	double x2 = (max.x - position.x) * inverse_direction.x;
+	double xmax = std::max(x1, x2), xmin = std::min(x1, x2);
 
-	double y_1 = (min.y - position.y) * inverse_direction.y;
-	double y_2 = (max.y - position.y) * inverse_direction.y;
+	double y1 = (origin.y - position.y) * inverse_direction.y;
+	double y2 = (max.y - position.y) * inverse_direction.y;
+	double ymax = std::max(y1, y2), ymin = std::min(y1, y2);
 
-	double z_1 = (min.z - position.z) * inverse_direction.z;
-	double z_2 = (max.z - position.z) * inverse_direction.z;
+	double z1 = (origin.z - position.z) * inverse_direction.z;
+	double z2 = (max.z - position.z) * inverse_direction.z;
+	double zmax = std::max(z1, z2), zmin = std::min(z1, z2);
 
-	auto t_limits = std::minmax({x_1, x_2, y_1, y_2, z_1, z_2});
-	if(t_limits.first < t_limits.second && t_limits.first > 0)
-		return t_limits.first;
+	double tmax = std::min({xmax, ymax, zmax});
+	double tmin = std::max({xmin, ymin, zmin});
+
+	if(tmax > 0 && tmax > tmin)
+		return tmin > 0 ? tmin : tmax;
 	else
-		return 0.0;
+		return std::numeric_limits<double>::infinity();
 }

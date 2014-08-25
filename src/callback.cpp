@@ -1,16 +1,11 @@
 #include "callback.h"
 using namespace athl;
 
-Callback::Callback(Runner runner, void *data) 
+Callback::Callback(CallbackExecFn runner, const std::shared_ptr<void> &data) 
 	: runner(runner), data(data)
 {}
 
-Ray Callback::run(Ray ray, Vector pos) const
+Ray Callback::invoke(const Ray &ray, const Vector &pos) const
 {
 	return runner(data, ray, pos);
-}
-
-Callback::~Callback()
-{
-	operator delete(data);
 }

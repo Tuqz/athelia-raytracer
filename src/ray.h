@@ -1,15 +1,16 @@
 #pragma once
 #include "vector.h"
+#include "colour.h"
 
 namespace athl
 {
 	class Ray
 	{
 	public:
-		Ray(const Vector &position, const Vector &direction);
-		double intersects_box(const Vector &min, double box_size);
-		const Vector position, direction;
+		Ray(const Vector &position, const Vector &direction, const Colour &colour);
+		double intersects_AABB(const Vector &origin, double size) const;
 	private:
-		Vector inverse_direction;
+		const Vector position, direction, inverse_direction;
+		const Colour colour;
 	};
 }
